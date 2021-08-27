@@ -1,10 +1,21 @@
 import React from 'react';
 
+const defineLeftZero = (number) => number < 10 ? '0' : '';
+const hours = [...new Array(24)].map((value, index) => `${defineLeftZero(index)}${index}:00`);
+
 function QuotationForm() {
     const submit = (event) => {
         event.preventDefault();
-        // console.log(event.target.elements, event.target.form);
-        [...event.target.elements].forEach(e => console.log(e.value));
+
+        const inputNames = ['pickUpAgency', 'pickUpDate', 'pickUpHour', 'specialRequest'];
+        const formInputs = event.target.elements;
+
+        const formValue = inputNames.reduce((acc, name) => ({
+            ...acc,
+            [name]: formInputs[name].value
+        }), {});
+
+        alert(JSON.stringify(formValue));
     }
 
     return (
@@ -71,12 +82,21 @@ function QuotationForm() {
                         Horário de retirada
                     </label>
 
-                    <input
-                        className="form-control"
+                    <select
+                        className="form-select"
                         id="pickUpHour"
                         name="pickUpHour"
                         aria-describedby="pickUpHourHelp"
-                    />
+                    >
+                        {hours.map((value)=>(
+                            <option
+                                key={value}
+                                value={value}
+                            >
+                                {value}
+                            </option>
+                        ))}
+                    </select>
 
                     <div
                         id="pickUpHourHelp"
@@ -91,77 +111,27 @@ function QuotationForm() {
 
             <div className="row mb-3">
 
-                <div className="col-md-5">
+                <div className="col-md-12">
 
                     <label
                         className="form-label"
-                        htmlFor="deliveryAgency"
+                        htmlFor="specialRequest"
                     >
-                        Local de devolução
+                        Pedido especial
                     </label>
 
-                    <input
+                    <textarea
                         className="form-control"
-                        id="deliveryAgency"
-                        name="deliveryAgency"
-                        aria-describedby="deliveryAgencyHelp"
+                        id="specialRequest"
+                        name="specialRequest"
+                        aria-describedby="specialRequestHelp"
                     />
 
                     <div
-                        id="deliveryAgencyHelp"
+                        id="specialRequestHelp"
                         className="form-text"
                     >
-                        Selecione o local onde deseja devolver o carro.
-                    </div>
-
-                </div>
-
-                <div className="col-md-4">
-
-                    <label
-                        className="form-label"
-                        htmlFor="deliveryDate"
-                    >
-                        Data de devolução
-                    </label>
-
-                    <input
-                        className="form-control"
-                        id="deliveryDate"
-                        name="deliveryDate"
-                        aria-describedby="deliveryDateHelp"
-                    />
-
-                    <div
-                        id="deliveryDateHelp"
-                        className="form-text"
-                    >
-                        Selecione a data de devolução.
-                    </div>
-
-                </div>
-
-                <div className="col-md-3">
-
-                    <label
-                        className="form-label"
-                        htmlFor="deliveryHour"
-                    >
-                        Horário de devolução
-                    </label>
-
-                    <input
-                        className="form-control"
-                        id="deliveryHour"
-                        name="deliveryHour"
-                        aria-describedby="deliveryHourHelp"
-                    />
-
-                    <div
-                        id="deliveryHourHelp"
-                        className="form-text"
-                    >
-                        Selecione a hora de devolução.
+                        Esse é um espaço destinado especialmente para você nos contar como podemos lhe atender melhor
                     </div>
 
                 </div>
