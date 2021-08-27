@@ -1,37 +1,30 @@
-import React, {useState} from 'react';
-import FormValues from "../FormValues";
+import React from 'react';
+import { useFormik } from 'formik';
+import FormValues from '../FormValues';
 
 const defineLeftZero = (number) => number < 10 ? '0' : '';
 const hours = [...new Array(24)].map((value, index) => `${defineLeftZero(index)}${index}:00`);
 
 function QuotationForm() {
-    const [formValues, setFormValues] = useState({
-        pickUpAgency: '',
-        pickUpDate: '',
-        pickUpHour: '',
-        specialRequest: ''
+    const {
+        values: formValues,
+        handleChange: handleFieldChange,
+        handleSubmit
+    } = useFormik({
+        initialValues: {
+            pickUpAgency: '',
+            pickUpDate: '',
+            pickUpHour: '',
+            specialRequest: ''
+        },
+        onSubmit: (values) => {
+            console.log(values);
+        }
     });
-
-    const submit = (event) => {
-        event.preventDefault();
-
-        console.log(formValues);
-    }
-
-    const handleFieldChange = (event) => {
-        const {name, value} = event.target;
-
-        setFormValues((prevValues) =>
-            ({
-                ...prevValues,
-                [name]: value
-            })
-        );
-    }
 
     return (
         <>
-            <form onSubmit={submit}>
+            <form onSubmit={handleSubmit}>
 
                 <div className="row mb-3">
 
