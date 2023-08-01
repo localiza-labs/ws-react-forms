@@ -9,9 +9,10 @@
     "bootstrap": "^5.1.0",
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
+    "node-sass": "^9.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
@@ -41,11 +42,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/helper-compilation-targets": "^7.22.9",
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.3",
-    "node-sass": "^9.0.0",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
