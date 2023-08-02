@@ -1,74 +1,57 @@
-import React from 'react';
-import {useFormik} from 'formik';
-import {object as schema, string} from 'yup';
-
-import FormValues from '../FormValues';
-import {InputField, TextareaField} from "../Form";
-import SelectField from "../Form/SelectField";
-import Loading from "../Loading";
+import React, {useState} from 'react';
+import FormValues from "../FormValues";
 
 const defineLeftZero = (number) => number < 10 ? '0' : '';
 
 const hours = [...new Array(24)].map((value, index) => `${defineLeftZero(index)}${index}:00`);
 
-const sleep = (time = 1000) => new Promise((resolve) => {
-    setTimeout(() => {
-        resolve(false);
-    },time)
-})
-
-const validationSchema = schema({
-    pickUpAgency: string()
-        .required('É preciso preencher o local de retirada'),
-    pickUpDate: string()
-        .required('É preciso preencher a data de retirada')
-        .matches(/^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/, 'A data precisa estar no formato dd/mm/yyyy'),
-    pickUpHour: string()
-        .required('É preciso preencher a hora de retirada'),
-});
-
 function QuotationForm() {
-    const {
-        values: formValues,
-        handleChange: handleFieldChange,
-        handleBlur,
-        touched,
-        errors,
-        handleSubmit,
-        isSubmitting
-    } = useFormik({
-        initialValues: {
-            pickUpAgency: '',
-            pickUpDate: '',
-            pickUpHour: '',
-            specialRequest: ''
-        },
-        validationSchema,
-        onSubmit: async (values) => {
-            await sleep();
-            console.log(values);
-        }
+    const [formValues, setFormValues] = useState({
+        pickUpAgency: '',
+        pickUpDate: '',
+        pickUpHour: '',
+        specialRequest: ''
     });
+
+    const submit = (event) => {
+        event.preventDefault();
+
+        console.log(formValues);
+    }
+
+    const handleFieldChange = (event) => {
+        const {name, value} = event.target;
+
+        setFormValues((prevValues) =>
+            ({
+                ...prevValues,
+                [name]: value
+            })
+        );
+    }
 
     return (
         <>
-            <form
-                onSubmit={handleSubmit}
-            >
+            <form onSubmit={submit}>
 
                 <div className="row mb-3">
 
                     <div className="col-md-5">
 
-                        <InputField
+                        <label
+                            className="form-label"
+                            htmlFor="pickUpAgency"
+                        >
+                            Local de retirada
+                        </label>
+
+                        <input
+                            className="form-control"
                             id="pickUpAgency"
-                            label="Local de retirada"
-                            hint="Selecione o local onde deseja retirar o carro."
-                            error={errors.pickUpAgency}
-                            touched={touched.pickUpAgency}
+                            name="pickUpAgency"
+                            aria-describedby="pickUpAgencyHelp"
                             value={formValues.pickUpAgency}
                             onChange={handleFieldChange}
-                            onBlur={handleBlur}
                         />
 
                     </div>
