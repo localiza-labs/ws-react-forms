@@ -6,16 +6,19 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@typescript-eslint/parser": "^5.62.0",
     "babel": "^6.23.0",
     "bootstrap": "^5.1.0",
-    "eslint": "^8.0.1",
+    "classnames": "^2.3.2",
+    "eslint": "^8.46.0",
     "eslint-config-airbnb": "^19.0.4",
     "formik": "^2.4.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.1",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yup": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
@@ -44,15 +47,17 @@
   "devDependencies": {
     "@babel/helper-compilation-targets": "^7.22.9",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-config-standard-with-typescript": "^37.0.0",
+    "eslint-plugin-ft-flow": "^3.0.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.1",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "hermes-eslint": "^0.15.0",
     "node-sass": "^9.0.0",
     "typescript": "*"
   }
-
-  
 }

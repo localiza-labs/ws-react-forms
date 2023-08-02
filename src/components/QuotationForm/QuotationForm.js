@@ -1,16 +1,50 @@
 import React from 'react';
 import {useFormik} from "formik";
+import * as yup from 'yup';
 import FormValues from "../FormValues";
+import InputField from '../Form/InputField';
+import * as TSESLint from '@typescript-eslint/utils/ts-eslint';
 
 const defineLeftZero = (number) => number < 10 ? '0' : '';
 const hours = [...new Array(24)].map((value, index) => `${defineLeftZero(index)}${index}:00`);
+
+
+const validate = (values) => {
+
+
+    const error = {};
+
+    if(!values.pickUpAgency) {
+
+        error.pickUpAgency = 'é preciso preencher o local de retirada';
+
+    }
+
+    if(!values.pickUpDate) {
+
+        error.pickUpDate = 'é preciso preencher a data de retirada';
+
+    }
+
+    if(!values.pickUpHour) {
+
+        error.pickUpHour = 'é preciso preencher selecionar o horario de retirada';
+
+    }
+
+    return error;
+
+}
 
 function QuotationForm() {
     const {
 
         values: formValues,
         handleChange: handleFieldChange,
-        handleSubmit
+        handleSubmit,
+        handleBlur,
+        touched, 
+        errors
 
     } = useFormik( {validateOnChange, validateOnBlur, validateOnMount, isInitialValid, enableReinitialize, onSubmit, ...rest}: {
 
@@ -21,13 +55,13 @@ function QuotationForm() {
             pickUpHour: '',
             specialRequest: ''
     
-        },
-        
+        }
+        //validate,
         onSubmit: (values: Values) => {
 
             console.log(values);
 
-        }
+        };
 
     }); 
 
@@ -39,28 +73,19 @@ function QuotationForm() {
 
                     <div className="col-md-5">
 
-                        <label
-                            className="form-label"
-                            htmlFor="pickUpAgency"
-                        >
-                            Local de retirada
-                        </label>
-
-                        <input
-                            className="form-control"
+                       <InputField 
+                       
                             id="pickUpAgency"
-                            name="pickUpAgency"
-                            aria-describedby="pickUpAgencyHelp"
+                            label="local de retirada"
+                            hint="Selecione o local onde deseja retirar o carro."
+                            error={errors.pickUpAgency}
+                            touched={touched.pickUpAgency}
                             value={formValues.pickUpAgency}
                             onChange={handleFieldChange}
-                        />
+                            onBlur={handleBlur}
 
-                        <div
-                            id="pickUpAgencyHelp"
-                            className="form-text"
-                        >
-                            Selecione o local onde deseja retirar o carro.
-                        </div>
+
+                       />
 
                     </div>
 
